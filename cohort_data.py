@@ -67,7 +67,33 @@ def students_by_cohort(filename, cohort='All'):
 
     students = []
 
-    # TODO: replace this with your code
+    # retrieve file
+    cohort_data_file = open(filename)
+
+    # loop though each line of the file
+    for line in cohort_data_file:    
+    # trim last two characters of each line
+      line = line[:-1]
+      # split/tokenize by | character
+      line_list = line.split("|")
+      # unpack line by assigning each item in line_list to a variable
+      f_name, l_name, house, professor, date = line_list
+      # if cohort argument is empty, return all names
+      # else return empty list
+      if cohort == "All":
+        # add all students to list
+        students.add(f"{f_name} {l_name}")
+      else:
+      # if cohort variable is not provided, use default, and return all names
+      # check if line contains cohort element
+        if date != "": 
+      # if cohort name in specified line contains the cohort, then add names to students list
+          if date == cohort:
+            students.add(f"{f_name} {l_name}")
+            
+      # if cohort variable is not a cohort provided, return empty list
+        else: 
+          break
 
     return sorted(students)
 
